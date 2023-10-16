@@ -8,8 +8,9 @@ Some parts of the API are defined with classes Client and UDP with pure virtual 
 
 Sometimes the methods of the API are not implemented to behave the same way in all libraries.
 
-First document in this repo is a research of implementation of the API in 12 libraries.
+* [Arduino networking API guide for networking library developers](ArduinoNetAPIDev.md)
+* [Implementation of the API in significant libraries](ArduinoNetAPILibs.md)
 
+Tip: open Outline for the documents:
 
-* [Implementation of the API in libraries](ArduinoNetAPILibs.md)
-
+![tip outline](open-outline.png)

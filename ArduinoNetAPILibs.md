@@ -109,17 +109,17 @@ All libraries have [localIP()](https://www.arduino.cc/reference/en/libraries/eth
 
 ### WiFi station getters
 
-| library | SSID | [BSSID](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.bssid/) | [encryptionType](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.encryptiontype/) | channel | RSSI |
-|---|:---:|:---:|:---:|:---:|:---:|
-|[WiFi][2] * |✓ | ✓ |✓ | |✓ |
-|[WiFi101][4] | ✓ | ✓ |✓ |✓ |✓ |
-|[WiFiNINA][3] | ✓ | ✓ |✓ | |✓ |
-|[WiFiS3][5] | ✓ | ✓ |✓ | |✓ |
-|[Mbed WiFi][6] | ✓ | ✓ |✓ | |✓ |
-|[C33 Wifi][8] | ✓ | ✓ |✓ | |✓ |
-|[esp8266 WiFi][18] |✓ |without param | | |✓ |
-|[esp32 WiFi][19] |✓ | without param| | |✓ |
-|[WiFiEspAT][14] |✓ |✓ | ||✓ |
+| library | SSID | [BSSID](https://www.arduino.cc/reference/en/libraries/wifi/wifi.bssid/) | [encryptionType](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.encryptiontype/) | channel | RSSI | <del>reasonCode</del> |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+|[WiFi][2] * |✓ | ✓ |✓ | |✓ | |
+|[WiFi101][4] | ✓ | ✓ |✓ |✓ |✓ | |
+|[WiFiNINA][3] | ✓ | ✓ |✓ | |✓ | ✓* |
+|[WiFiS3][5] | ✓ | ✓ |✓ | |✓ | returns 0 |
+|[Mbed WiFi][6] | ✓ | ✓ |✓ | |✓ | |
+|[C33 Wifi][8] | ✓ | ✓ |✓ | |✓ | returns 0 |
+|[esp8266 WiFi][18] |✓ |without param [PR](https://github.com/esp8266/Arduino/pull/9008) | | |✓ | |
+|[esp32 WiFi][19] |✓ | without param| | |✓ | |
+|[WiFiEspAT][14] |✓ |✓ | ||✓ | |
 
 ### WiFi AP network interface
 
@@ -133,8 +133,8 @@ For libraries which can only run one WiFi interface, AP ends with `begin` for st
 |[WiFiS3][5] | ✓ |
 |[Mbed WiFi][6] |✓ |
 |[C33 Wifi][8] |✓ |
-|[esp8266 WiFi][31] |softAP | enableAP(false) | softAPConfig | 
-|[esp32 WiFi][33] |softAP |enableAP(false) | softAPConfig | 
+|[esp8266 WiFi][31] |softAP | softAPdisconnect | softAPConfig | 
+|[esp32 WiFi][33] |softAP |softAPdisconnect | softAPConfig | 
 |[WiFiEspAT][14] |✓ | endAP | configureAP | 
 
 ### WiFi AP getters
@@ -149,7 +149,11 @@ For libraries which can only run one WiFi interface, after `beginAP` standard ge
 
 ### WiFi station networks scan
 
-TODO
+All researched libraries have method [`scanNetworks()`](https://www.arduino.cc/reference/en/libraries/wifi/wifi.scannetworks/) defined by the first WiFi library.
+
+To get the result of networks scan, all libraries have methods defined by the first WiFi library: `SSID(n)`, `encryptionType(n)` and `RSSI(n)`. Additionally all libraries except of the old WiFi library have `channel(n)`.
+
+All libraries except of the old WiFi library have [BSSID](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.bssid/), but the esp8266 and the esp32 WiFi library have `BSSID(n)` without the parameter for the user provided array. ([PR for esp8266](https://github.com/esp8266/Arduino/pull/9008))
 
 ### Network services
 
@@ -251,7 +255,7 @@ All Server classes have method [`begin`](https://www.arduino.cc/reference/en/lib
 
 | library | class | begin(port) | end | [op bool](https://www.arduino.cc/reference/en/libraries/ethernet/ifserver/) | <del>status</del> | [available](https://www.arduino.cc/reference/en/libraries/ethernet/server.available/) | [accept](https://www.arduino.cc/reference/en/libraries/ethernet/server.accept/) | 
 |---|--- |:---:|:---:|:---:|:---:|:---:|:---:|
-|Ethernet |[EthernetServer][41] | PR->| [PR](https://github.com/arduino-libraries/Ethernet/pull/235)  | ✓ *2018 | |✓* |✓ *2018 |
+|Ethernet |[EthernetServer][41] | PR->| [PR](https://github.com/arduino-libraries/Ethernet/pull/235)  | ✓ *2018 [issue](https://github.com/arduino-libraries/Ethernet/issues/236) | |✓* |✓ *2018 |
 |WiFi | [WiFiServer][42] |  | | | ✓* |✓ | |
 |WiFi101 |[WiFiServer][44] | [PR](https://github.com/arduino-libraries/WiFi101/pull/346) | [PR](https://github.com/arduino-libraries/WiFi101/pull/347) |  [PR](https://github.com/arduino-libraries/WiFi101/pull/345) | returns 0 [PR](https://github.com/arduino-libraries/WiFi101/pull/348) |✓ |[PR](https://github.com/arduino-libraries/WiFi101/pull/320) |
 |WiFiNINA | [WiFiServer][43] |PR-> | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/254) |[PR](https://github.com/arduino-libraries/WiFiNINA/pull/253) | ✓ |✓ | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/204)|
