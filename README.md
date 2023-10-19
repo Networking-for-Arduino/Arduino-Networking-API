@@ -10,6 +10,7 @@ Sometimes the methods of the API are not implemented to behave the same way in a
 
 * [Arduino networking API guide for networking library developers](ArduinoNetAPIDev.md)
 * [Implementation of the API in significant libraries](ArduinoNetAPILibs.md)
+* There are multiple open discussions on the [Discussions tab](https://github.com/JAndrassy/Arduino-Networking-API/discussions)
 
 Tip: open Outline for the documents:
 
