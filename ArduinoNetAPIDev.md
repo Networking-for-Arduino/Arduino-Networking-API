@@ -551,11 +551,11 @@ Method [`available()`](https://www.arduino.cc/reference/en/libraries/ethernet/se
 
 Method `available()` should return one client from all connected clients which has data available (available() returns more than 0). It may try to return the previously returned client if that client still has data to read.
 
-For correct implementation of `available()` and for  print-to-all-clients functionality the implementation of the Server class must register all incoming clients for the servers port (accept them from the TCP/IP stack). 
+In many libraries every copy of a WiFiClient object returned by server.available() is not valid after next call to server.available().
 
 Many users don't know and understand this behavior of the server.available() method.  It doesn't help the case that the esp8266 and the esp32 library implement available() as accept(). In most request/response use-cases it doesn't even matter.
 
-`available()` and print-to-all-cliients can be tested with the PagerServer example.
+`available()` and print-to-all-clients can be tested with the PagerServer example.
 
 ### Print to all clients
 
@@ -575,6 +575,16 @@ This method returns a copy of a Client object (EthernetClient, WiFiClient). If n
 The method should accept an incoming connection from the TCP/IP stack and return it as the Client object. Some library/fw implementation may have to accept the connection from the TCP/IP stack as it happens and return it on next call to server.accept() from the sketch.
 
 `accept` can be tested with the AdvancedChatServer example.
+
+## Implementation recommendation
+
+Don't implement server.available() and print-to-all-clients in firmware or at low level part of the library. Implement it at the Arduino API level.
+
+Implement server as two classes. First, non-standard, without base class and available(), with constructor without parameters, begin with parameter port, `accept()`and `end()`. Let's call it WiFiServerNew/EthernetServerNew. Users will prefer to use this.
+
+Then for completeness, implement a standard Arduino WiFiServer/EthernetServer  inherited from the 'ServerNew' and Print (or Server if you want). Here use an array of WiFiClient/EthernetClient objects to store the accepted clients for `available()` and print-to-all-clients. Using array of Clients has the advantage of always having the one Client object which holds the state of the connected client, reference to socket, buffers etc as it is required for a Client object in Arduino networking API.
+
+There are two examples of implementing standard Server inherited from server class with accept() only. The simpler [ArduinoWiFiServerEsp](https://github.com/JAndrassy/TelnetStream/blob/master/src/ArduinoWiFiServerESP.h) in the TelnetStream library and the advanced [ArduinoWiFiServer](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ArduinoWiFiServer.h) in esp8266 WiFi library. You can copy one of them and use it in your library almost without changes.
 
 # UDP
 
