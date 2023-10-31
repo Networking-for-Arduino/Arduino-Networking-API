@@ -222,7 +222,7 @@ ESP8266WiFi |[WiFiClient][30] |  ✓ | ✓ | ✓ | Stream's setTimeout [discussi
 |WiFiEspAT|[WiFiClient][34] |  | ✓ | ✓ | |
 |EthernetENC |[EthernetClient][35] |  | | ✓ | ✓ |
 |STM32Ethernet| [EthernetClient][36] | | | ✓ | ✓ |
-|QNEthernet |[EthernetClient][37] |  | ✓ | ✓ | ✓ |
+|QNEthernet |[EthernetClient][37] | ✓ | ✓ | ✓ | ✓ |
  
 
 ## Server class
@@ -260,17 +260,17 @@ All Server classes have method [`begin`](https://www.arduino.cc/reference/en/lib
 |WiFi101 |[WiFiServer][44] | [PR](https://github.com/arduino-libraries/WiFi101/pull/346) | [PR](https://github.com/arduino-libraries/WiFi101/pull/347) |  [PR](https://github.com/arduino-libraries/WiFi101/pull/345) | returns 0 [PR](https://github.com/arduino-libraries/WiFi101/pull/348) |✓ |[PR](https://github.com/arduino-libraries/WiFi101/pull/320) |
 |WiFiNINA | [WiFiServer][43] |PR-> | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/254) |[PR](https://github.com/arduino-libraries/WiFiNINA/pull/253) | ✓ |✓ | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/204)|
 |WiFiS3 |[WiFiServer][45] |✓*| ✓* | [PR](https://github.com/arduino/ArduinoCore-renesas/pull/140) | |✓ | [PR](https://github.com/arduino/ArduinoCore-renesas/pull/144)|
-|Mbed SocketWrapper | [MbedServer][46] | | | | returns 0 [issue](https://github.com/arduino/ArduinoCore-mbed/issues/730) | ✓ | 
+|Mbed SocketWrapper | [MbedServer][46] | | [PR](https://github.com/arduino/ArduinoCore-mbed/pull/751) | | returns 0 [issue](https://github.com/arduino/ArduinoCore-mbed/issues/730) | (1) | [PR](https://github.com/arduino/ArduinoCore-mbed/pull/750)
 |C33 lwIpWrapper |[lwipServer][48] | | | | |✓ | |
 |ESP8266WiFi |[WiFiServer][50] |✓ | stop() -> | [PR](https://github.com/esp8266/Arduino/pull/8995) | ✓ | (1)(2) | ✓ | 
-|esp32 WiFi | [WiFiServer][52] |✓ |✓ | ✓ | ✓ | ✗(2) | ✓ |
+|esp32 WiFi | [WiFiServer][52] |✓ |✓ | ✓ | ✓ | ✗(1) | ✓ |
 |WiFiEspAT|[WiFiServer][54] | ✓ |✓ |✓ | ✓ |✓ |✓ |
 |EthernetENC |[EthernetServer][55] |✓ | ✓ |✓ | |✓ | ✓ |
 |STM32Ethernet |[EthernetServer][56] |✓ | -> | [issue](https://github.com/stm32duino/STM32Ethernet/issues/73) | | ✓ |✓ | 
 |QNEthernet |[EthernetServer][57] | ✓ | ✓ | ✓ | | ✓ |✓ | 
 
-1) with [ArduinoWiFiServer](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ArduinoWiFiServer.h)
-2) the method called `available` in WiFiServer works like `accept` method 
+1) the method called `available` in WiFiServer works like `accept` method 
+2) available() with [ArduinoWiFiServer](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ArduinoWiFiServer.h)
 
 ## UDP class
 
