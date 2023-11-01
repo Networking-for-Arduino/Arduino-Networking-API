@@ -11,6 +11,7 @@ Sometimes the methods of the API are not implemented to behave the same way in a
 * [Arduino networking API guide for networking library developers](ArduinoNetAPIDev.md)
 * [Implementation of the API in significant libraries](ArduinoNetAPILibs.md)
 * There are multiple open discussions on the [Discussions tab](https://github.com/JAndrassy/Arduino-Networking-API/discussions)
+* The [NetApiHelpers](https://github.com/JAndrassy/NetApiHelpers) library accompanies the Arduino networking API guide
 
 Tip: open Outline for the documents:
 
