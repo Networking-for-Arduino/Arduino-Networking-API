@@ -17,19 +17,23 @@
 |[WiFi101][104] | 2015 | in fw  | WiFi STA and local AP (ATWINC1500) | Arduino
 |[WiFiNINA][103]| 2018 | in fw  | WiFi STA and SoftAP (ESP32 with nina-fw) | Arduino
 |[WiFiS3][105] | 2023 | in fw  | WiFi STA and SoftAP (ESP32S3 with Uno R4 WiFi fw) |Arduino
-|[Mbed core][106] | 2018 | LwIP   | Ethernet/WiFi (any hw supported by Mbed OS) | Arduino
-|[C33 core][108] | 2023 | LwIP   | Ethernet (Eth peripheral), WiFi STA and SoftAP (on board ESP32C3) | Arduino
-|[ESP8266 core][110] | 2014 | LwIP   | WiFi STA and SoftAP, W5500, ENC28J60, PPP  | community
-|[ESP32 core][112] | 2016 | LwIP   | WiFi STA and SoftAP, Ethernet (Eth peripheral)  | Espressif
+|[Mbed core][106] | 2018 | LwIP   | Ethernet/WiFi (any HW with Mbed EMAC driver) | Arduino
+|[C33 core][108] | 2023 | LwIP   | Ethernet (MAC peripheral), WiFi STA and SoftAP (on board ESP32C3) | Arduino
+|[ESP8266 core][110] | 2014 | LwIP   | WiFi STA and SoftAP, Ethernet (W5500, ENC28J60), PPP  | community
+|[ESP32 core][112] | 2016 | LwIP   | WiFi STA and SoftAP, Ethernet (MAC peripheral, W5500)  | Espressif
 |[WiFiEspAT][114] | 2019 | in fw  | WiFi STA and SoftAP (ESP8266 or ESP32 with AT fw) | Juraj A
 |[EthernetENC][115] | 2013 | uIP    | Ethernet (ENC28J60) | Juraj A
-|[STM32Ethernet][116] | 2017 | LwIP   | Erhernet (STM32 Eth peripheral) | STM
+|[STM32Ethernet][116] | 2017 | LwIP   | Ethernet (STM32 Eth peripheral) | STM
 |[QNEthernet][117]  | 2021 | LwIP   | Ethernet (Teensy 4.1 Eth peripheral) | Shawn S
 
 (1) The Arduino WiFi library is obsolete. It is included in the research only because it was the first WiFi library.
 
-In following tables * marks the official Arduino library with the first introduction of the API function(s). 
+Legend for the tables in this document:
 
+* `✓` library has the function
+* `*` the official Arduino library with the first introduction of the API function(s). 
+* `+` the function was added in API unification effort after the research
+* `✗` library can't support the function
 
 ## Ethernet/WiFi object
 
@@ -46,15 +50,15 @@ In following tables * marks the official Arduino library with the first introduc
 |[C33 Wifi][8] | |status| ✓ | ✓ | lowPowerMode
 |[C33 Ethernet][9] | | hardwareStatus | |  | |
 |[esp8266 WiFi][10] | | status|||sleepMode
-|[esp8266 Ethernet][11] |constructor | status|| ✓ |
+|[esp8266 Ethernet][11] |constructor | status | | ✓ [PR](https://github.com/esp8266/Arduino/pull/9023) |
 |[esp32 WiFi][12] | | status|||sleep |
 |[esp32 Ethernet][13] | | | | | |
 |[WiFiEspAT][14] |init(Stream&) | status | ✓ | | sleepMode |
-|[EthernetENC][15] |init(CS) | hardwareStatus | | | |
+|[EthernetENC][15] |init(CS) | hardwareStatus | | + | |
 |[STM32Ethernet][16]| |  | |  | |
 |[QNEthernet][17]| | hardwareStatus | | ✓ | |
 
-(1) status is for WiFi station state, but returns WL_NO_SHIELD/WL_NO_MODULE if the hardware is not detected
+(1) status() is for the WiFi state, but returns WL_NO_SHIELD/WL_NO_MODULE if the hardware is not detected
 
 ### Ethernet network interface
 
@@ -63,7 +67,7 @@ In following tables * marks the official Arduino library with the first introduc
 |[Ethernet][1] * |✓| ✓ | ✓ | ✓ | ✓ |
 |[Mbed Ethernet][7] |✓| ✓ | ✓ |✓| ✓ |
 |[C33 Ethernet][9] | ✓ | ✓ | ✓ | ✓ | ✓ |
-|[esp8266 Ethernet][11] |✓ | ✓ | config | | |
+|[esp8266 Ethernet][11] |✓ | ✓ | ✓ | + | |
 |[esp32 Ethernet][13] |linkUp | ✓ | config | | |
 |[EthernetENC][15] |✓| ✓ | ✓ | ✓ | ✓ |
 |[STM32Ethernet][16]|✓ | ✓ | ✓| ✓ | ✓ |
@@ -78,7 +82,7 @@ In following tables * marks the official Arduino library with the first introduc
 |[WiFiNINA][3] |✓|✓|✓* |✓|[PR](https://github.com/arduino-libraries/WiFiNINA/pull/219)|✓|
 |[WiFiS3][5] | ✓ |✓| |✓| ✓ |✓|
 |[Mbed WiFi][6] | ✓ |✓| | ✓ |? |✓|
-|[C33 Wifi][8] | ✓ |✓| |✓| ?|✓|
+|[C33 Wifi][8] | ✓ |✓| |✓| ✓ | ✓ |
 |[esp8266 WiFi][18] |✓|not blocking| |✓| |✓|
 |[esp32 WiFi][19] | ✓ |not blocking| | wrong param. order| |✓|
 |[WiFiEspAT][14] |✓|✓| ✓ |✓|✓|✓|
@@ -89,37 +93,39 @@ All libraries have [localIP()](https://www.arduino.cc/reference/en/libraries/eth
 
 | library | [setHostname](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.sethostname/) | [setDNS](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.setdns/) | dnsIP | [macAddress](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.macaddress/)
 |---|:---:|:---:|:---:|:---:|
-|[Ethernet][1] | [PR](https://github.com/arduino-libraries/Ethernet/pull/223) or [PR](https://github.com/arduino-libraries/Ethernet/pull/233) | setDnsServerIP [PR](https://github.com/arduino-libraries/Ethernet/pull/231) | dnsServerIP PR | MACAddress PR
-|[WiFi][2] | | ✓* | | ✓*
-|[WiFi101][4] | hostname [PR](https://github.com/arduino-libraries/WiFi101/pull/337) |  | [PR](https://github.com/arduino-libraries/WiFi101/pull/344)| ✓|
-|[WiFiNINA][3] | ✓*| ✓ | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/251) | ✓
-|[WiFiS3][5] | ✓| ✓ | ✓* | ✓
-|[Mbed WiFi][6] |✓| ✓ | dnsServerIP [issue](https://github.com/arduino/ArduinoCore-mbed/issues/732) | ✓ |
-|[Mbed Ethernet][7] | ✓ | ✓ | dnsServerIP | ✓|
-|[C33 Wifi][8] | ✓ | ✓ | [issue](https://github.com/arduino/ArduinoCore-renesas/issues/155) | ✓
-|[C33 Ethernet][9] | | ✓ | dnsServerIP | MACAddress|
-|[esp8266 WiFi][18] | ✓ | | ✓ | ✓ |
-|[esp8266 Ethernet][11] | ✓ |
-|[esp32 WiFi][19] | ✓ | | ✓ | ✓ |
+|[Ethernet][1] | [PR](https://github.com/arduino-libraries/Ethernet/pull/233) | setDnsServerIP [PR](https://github.com/arduino-libraries/Ethernet/pull/231) | dnsServerIP PR | MACAddress PR
+|[WiFi][2] | | ✓* | | ✓* R
+|[WiFi101][4] | hostname [PR](https://github.com/arduino-libraries/WiFi101/pull/337) |  | [PR](https://github.com/arduino-libraries/WiFi101/pull/344)| ✓ R|
+|[WiFiNINA][3] | ✓*| ✓ | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/251) | ✓ R
+|[WiFiS3][5] | ✓| ✓ | ✓* | ✓ R [PR](https://github.com/arduino/ArduinoCore-renesas/pull/183)
+|[Mbed WiFi][6] |✓| ✓ | dnsServerIP [PR](https://github.com/arduino/ArduinoCore-mbed/pull/756) | ✓ R |
+|[Mbed Ethernet][7] | ✓ | ✓ | dnsServerIP | ✓ R|
+|[C33 Wifi][8] | ✓ | ✓ | [PR](https://github.com/arduino/ArduinoCore-renesas/pull/176) | ✓ R [PR](https://github.com/arduino/ArduinoCore-renesas/pull/184)
+|[C33 Ethernet][9] | | ✓ | dnsServerIP | MACAddress without param |
+|[esp8266 WiFi][18] | ✓ | + | ✓ | ✓ |
+|[esp8266 Ethernet][11] | ✓ | + | + | +
+|[esp32 WiFi][19] | ✓ | + | ✓ | ✓ |
 |[esp32 Ethernet][13] |✓ | | ✓ | ✓|
-|[WiFiEspAT][14] | ✓| ✓ | ✓ | ✓ |
-|[EthernetENC][15] | ✓ | ✓ | ✓ |✓ |
+|[WiFiEspAT][14] | ✓| ✓ | + | ✓ R |
+|[EthernetENC][15] | + | + | + |✓ |
 |[STM32Ethernet][16]| | | dnsServerIP | MACAddress
 |[QNEthernet][17]| ✓ | setDnsServerIP | dnsServerIP | ✓ |
+
+Flag R is for "reversed". Arduino WiFi libraries copied the bug of the first WiFi library. The bytes of the MAC address are returned in reversed order from `macAddress` getter.
 
 ### WiFi station getters
 
 | library | SSID | [BSSID](https://www.arduino.cc/reference/en/libraries/wifi/wifi.bssid/) | [encryptionType](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.encryptiontype/) | channel | RSSI | <del>reasonCode</del> |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
-|[WiFi][2] * |✓ | ✓ |✓ | |✓ | |
-|[WiFi101][4] | ✓ | ✓ |✓ |✓ |✓ | |
-|[WiFiNINA][3] | ✓ | ✓ |✓ | |✓ | ✓* |
+|[WiFi][2] * |✓ | ✓ R |✓ | |✓ | |
+|[WiFi101][4] | ✓ | ✓ R |✓ |✓ |✓ | |
+|[WiFiNINA][3] | ✓ | ✓ R |✓ | |✓ | ✓* |
 |[WiFiS3][5] | ✓ | ✓ |✓ | |✓ | returns 0 |
 |[Mbed WiFi][6] | ✓ | ✓ |✓ | |✓ | |
-|[C33 Wifi][8] | ✓ | ✓ |✓ | |✓ | returns 0 |
-|[esp8266 WiFi][18] |✓ |without param [PR](https://github.com/esp8266/Arduino/pull/9008) | | |✓ | |
-|[esp32 WiFi][19] |✓ | without param| | |✓ | |
-|[WiFiEspAT][14] |✓ |✓ | ||✓ | |
+|[C33 Wifi][8] | ✓ | ✓ |returns 0 | |✓ | returns 0 |
+|[esp8266 WiFi][18] |✓ | + | | |✓ | |
+|[esp32 WiFi][19] |✓ | + | | |✓ | |
+|[WiFiEspAT][14] |✓ |✓ R | ||✓ | |
 
 ### WiFi AP network interface
 
@@ -153,7 +159,9 @@ All researched libraries have method [`scanNetworks()`](https://www.arduino.cc/r
 
 To get the result of networks scan, all libraries have methods defined by the first WiFi library: `SSID(n)`, `encryptionType(n)` and `RSSI(n)`. Additionally all libraries except of the old WiFi library have `channel(n)`.
 
-All libraries except of the old WiFi library have [BSSID](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.bssid/), but the esp8266 and the esp32 WiFi library have `BSSID(n)` without the parameter for the user provided array. ([PR for esp8266](https://github.com/esp8266/Arduino/pull/9008))
+Enumeration of encryption type constant names for`encryptionType(n)` are in esp32 and Portenta C33 very different from the common set used in WiFi, WiFi101, WiFiNINA, WiFiS3, esp8266 and WiFiEspAT.
+
+All libraries except of the old WiFi library have [BSSID](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.bssid/). WiFi, WiFi101 and WiFiNINA return reversed ordering of bytes.
 
 ### Network services
 
@@ -175,7 +183,7 @@ The Ethernet/WiFi objects have some common names for simple services. (Libraries
 |[esp32 WiFi][12] | ✓ | | |
 |[esp32 Ethernet][13] | | | |
 |[WiFiEspAT][14] | ✓ | ✓ | ✓ |
-|[EthernetENC][15] | ✓ | | |
+|[EthernetENC][15] | + | | |
 |[STM32Ethernet][16]| | | |
 |[QNEthernet][17] | | | |
 
@@ -220,9 +228,9 @@ C33 lwIpWrapper |[lwipClient][28] | | | ✓ | ✓ |
 ESP8266WiFi |[WiFiClient][30] |  ✓ | ✓ | ✓ | Stream's setTimeout [discussion](https://github.com/esp8266/Arduino/discussions/9004) |
 |esp32 WiFi | [WiFiClient][32] | ✓ | ✓ | | setTimeout(seconds) !!! [issue](https://github.com/espressif/arduino-esp32/issues/5558) | 
 |WiFiEspAT|[WiFiClient][34] |  | ✓ | ✓ | |
-|EthernetENC |[EthernetClient][35] |  | | ✓ | ✓ |
+|EthernetENC |[EthernetClient][35] |  | | + | ✓ |
 |STM32Ethernet| [EthernetClient][36] | | | ✓ | ✓ |
-|QNEthernet |[EthernetClient][37] | ✓ | ✓ | ✓ | ✓ |
+|QNEthernet |[EthernetClient][37] | + | ✓ | + | ✓ |
  
 
 ## Server class
@@ -244,8 +252,8 @@ Arduino core has `Server` class which inherits from the `Print` class. The idea 
 |C33 lwIpWrapper |[lwipServer][48] |✓| | ✓ |
 |ESP8266WiFi |[WiFiServer][50] || | [ArduinoWiFiServer](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ArduinoWiFiServer.h) |
 |esp32 WiFi | [WiFiServer][52] | ✓ | ✓ ||✗ |
-|WiFiEspAT|[WiFiServer][54] | | ✓| WiFiServerPrint |
-|EthernetENC |[EthernetServer][55] || ✓ |  EthernetServerPrint |
+|WiFiEspAT|[WiFiServer][54] | | +| WiFiServerPrint |
+|EthernetENC |[EthernetServer][55] || + |  EthernetServerPrint |
 |STM32Ethernet |[EthernetServer][56] |✓| ✓ | ✓ |
 |QNEthernet |[EthernetServer][57] |✓| ✓ | ✓ |
 
@@ -262,11 +270,11 @@ All Server classes have method [`begin`](https://www.arduino.cc/reference/en/lib
 |WiFiS3 |[WiFiServer][45] |✓*| ✓* | [PR](https://github.com/arduino/ArduinoCore-renesas/pull/140) | |✓ | [PR](https://github.com/arduino/ArduinoCore-renesas/pull/144)|
 |Mbed SocketWrapper | [MbedServer][46] | | [PR](https://github.com/arduino/ArduinoCore-mbed/pull/751) | | returns 0 [issue](https://github.com/arduino/ArduinoCore-mbed/issues/730) | (1) | [PR](https://github.com/arduino/ArduinoCore-mbed/pull/750)
 |C33 lwIpWrapper |[lwipServer][48] | | | | |✓ | |
-|ESP8266WiFi |[WiFiServer][50] |✓ | stop() -> | [PR](https://github.com/esp8266/Arduino/pull/8995) | ✓ | (1)(2) | ✓ | 
+|ESP8266WiFi |[WiFiServer][50] | ✓ | + | + | ✓ | (1)(2) | ✓ | 
 |esp32 WiFi | [WiFiServer][52] |✓ |✓ | ✓ | ✓ | ✗(1) | ✓ |
-|WiFiEspAT|[WiFiServer][54] | ✓ |✓ |✓ | ✓ |✓ |✓ |
-|EthernetENC |[EthernetServer][55] |✓ | ✓ |✓ | |✓ | ✓ |
-|STM32Ethernet |[EthernetServer][56] |✓ | -> | [issue](https://github.com/stm32duino/STM32Ethernet/issues/73) | | ✓ |✓ | 
+|WiFiEspAT|[WiFiServer][54] | + |✓ |✓ | ✓ |✓ |✓ |
+|EthernetENC |[EthernetServer][55] |+ | ✓ |✓ | |✓ | ✓ |
+|STM32Ethernet |[EthernetServer][56] |✓ | + | + | | ✓ |✓ | 
 |QNEthernet |[EthernetServer][57] | ✓ | ✓ | ✓ | | ✓ |✓ | 
 
 1) the method called `available` in WiFiServer works like `accept` method 
