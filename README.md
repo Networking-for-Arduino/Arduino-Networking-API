@@ -9,9 +9,10 @@ Some parts of the API are defined with classes Client and UDP with pure virtual 
 Sometimes the methods of the API are not implemented to behave the same way in all libraries.
 
 * [Arduino networking API guide for networking library developers](ArduinoNetAPIDev.md)
-* [Implementation of the API in significant libraries](ArduinoNetAPILibs.md)
-* There are multiple open discussions on the [Discussions tab](https://github.com/JAndrassy/Arduino-Networking-API/discussions)
 * The [NetApiHelpers](https://github.com/JAndrassy/NetApiHelpers) library accompanies the Arduino networking API guide
+* [Implementation of the API in significant libraries](ArduinoNetAPILibs.md)
+* [Report](ArduinoNetLibsTestReport.md) from testing the WiFi/Ethernet object in libraries with test sketches from NetApiHelpers library
+* There are multiple open discussions on the [Discussions tab](https://github.com/JAndrassy/Arduino-Networking-API/discussions)
 
 Tip: open Outline for the documents:
 
