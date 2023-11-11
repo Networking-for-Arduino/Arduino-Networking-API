@@ -157,11 +157,21 @@ For libraries which can only run one WiFi interface, after `beginAP` standard ge
 
 All researched libraries have method [`scanNetworks()`](https://www.arduino.cc/reference/en/libraries/wifi/wifi.scannetworks/) defined by the first WiFi library.
 
-To get the result of networks scan, all libraries have methods defined by the first WiFi library: `SSID(n)`, `encryptionType(n)` and `RSSI(n)`. Additionally all libraries except of the old WiFi library have `channel(n)`.
+The scan result access methods:
 
-Enumeration of encryption type constant names for`encryptionType(n)` are in esp32 and Portenta C33 very different from the common set used in WiFi, WiFi101, WiFiNINA, WiFiS3, esp8266 and WiFiEspAT.
+| library | SSID(n) | BSSID(n,bssid) | channel(n) | encryptionType(n) | RSSI(n) |
+|---|:---:|:---:|:---:|:---:|:---:|
+|[WiFi][2]* | ✓ |  |  | ✓ | ✓ |
+|[WiFi101][4] | ✓ | ✓*R | ✓* | ✓ | ✓ |
+|[WiFiNINA][3] | ✓ | ✓R | ✓ | ✓ | ✓ |
+|[WiFiS3][5] | ✓ | ✓ | ✓ | ✓ | ✓ |
+|[Mbed WiFi][6] |✓ | ✓ | ✓ | ✓ | ✓ |
+|[C33 Wifi][8] |✓ | ✓ | ✓ | ✓(1) | ✓ |
+|[esp8266 WiFi][31] | ✓ | + | ✓ | ✓ | ✓ |
+|[esp32 WiFi][33] | ✓ | + | ✓ | ✓(1) | ✓ |
+|[WiFiEspAT][14] |✓ | ✓R | ✓ | ✓ | ✓ |
 
-All libraries except of the old WiFi library have [BSSID](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.bssid/). WiFi, WiFi101 and WiFiNINA return reversed ordering of bytes.
+(1) encryption type constant names are in esp32 and Portenta C33 very different from the common set used in other libraries
 
 ### Network services
 
