@@ -162,6 +162,8 @@ TODO
 
 Method [`disconnect`](https://www.arduino.cc/reference/en/libraries/wifi/wifi.disconnect/) in WiFi libraries leaves the WiFi network.
 
+`disconnect()` should not clear static IP settings. Next `begin` should use the same static IP configuration if `config` was not used to change or clear static IP.
+
 ### setHostname (DHCP)
 
 Method [`setHostname`](https://www.arduino.cc/reference/en/libraries/wifinina/wifi.sethostname/) provides a way to set the hostname sent with the DHCP request. In some WiFi libraries this name is used for the locally started AP too.
@@ -181,6 +183,8 @@ config(IPAddress local_ip, IPAddress dns_server = IP_ALL_ZERO, IPAddress gateway
 ```
 
 For static IP configuration user must specify the local IP address. The rest of the settings is optional and the library will use default values: DNS and gateway as .1 IP address in the same network and net mask 255.255.255.0. 
+
+`WiFi.config(INADDR_NONE)` should clear static IP configuration and set use of DHCP on next 'begin'.
 
 For unifying the API, Ethernet libraries should use `config` too.
 

@@ -35,7 +35,6 @@ pull requests:
 With listed pull request applied, remaining issues are
 
 * WiFi.h doesn't include WiFiClient.h
-* after using static IP, DHCP is not possible. The problem in the ESP32 WiFi library used in the firmware ([PR](https://github.com/espressif/arduino-esp32/pull/8848)).
 * hostname is not sent with DHCP request
 
 pull requests:
@@ -45,7 +44,10 @@ pull requests:
 
 ### WiFiEspAT
 
-As the WiFiEspAT library is maintained by the author of this document, all problems discovered with the tests were solved. Only issue is the reversed macAddress and BSSID for compatibility with Arduino WiFi libraries.
+Issues:
+
+* WiFi.disconnect() clears static IP
+* reversed macAddress and BSSID for compatibility with Arduino WiFi libraries.
 
 
 ## Ethernet
@@ -154,10 +156,11 @@ With listed pull requests applied, remaining issues are
 * hostname is not sent with DHCP request
 * doesn't have WiFi.h
 * does scan in `begin` and only joins the network if it is in the scan result
+* static IP change ignored after first `begin`
 
 pull requests:
 
-* [`config` ignored](https://github.com/arduino/ArduinoCore-renesas/pull/179)
+* [can't set static IP](https://github.com/arduino/ArduinoCore-renesas/pull/179)
 * [reversed MAC](https://github.com/arduino/ArduinoCore-renesas/pull/184)
 
 ### C33 Ethernet
