@@ -4,9 +4,9 @@ A repository to document the Arduino Networking API established by the Arduino E
 
 We can use Issues, Pull Requests and Discussions to collaborate on the API documentation, clarifications and design decisions.
 
-Some parts of the API are defined with classes Client and UDP with pure virtual methods. Other parts of the API are not strictly defined and are copied from library to library.
+Arduino founder Tom Igoe, whose name you can read in many Arduino networking examples, [expressed support](https://groups.google.com/a/arduino.cc/g/developers/c/c-1I3WAfXDY/m/rM_T9vqAAQAJ) for this effort.
 
-Sometimes the methods of the API are not implemented to behave the same way in all libraries.
+Some parts of the API are defined with classes Client and UDP with pure virtual methods. Other parts of the API are not strictly defined and are copied from library to library. Sometimes the methods of the API are not implemented to behave the same way in all libraries.
 
 * [Arduino networking API guide for networking library developers](ArduinoNetAPIDev.md)
 * The [NetApiHelpers](https://github.com/JAndrassy/NetApiHelpers) library accompanies the Arduino networking API guide
