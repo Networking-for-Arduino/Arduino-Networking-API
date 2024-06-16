@@ -497,7 +497,9 @@ virtual int read(uint8_t *buf, size_t size) = 0;
 ```
 Note: `Stream` doesn't have `read(byte, size)` method so any access to `Client` as `Stream` will not use it.
 
-Usually `read(byte)` is implemented using `read(buffer, size)`, which handles the receive buffer. 
+Method `read()` to read one byte should return -1 if no data are available. In case of `read(buffer,size)`most libraries return 0 if no data are available, but some libraries, including the classic Ethernet library can return -1.
+
+Usually `read()` is implemented using `read(buffer, size)`, which handles the receive buffer. 
 ```
 int WiFiClient::read() {
   uint8_t b;

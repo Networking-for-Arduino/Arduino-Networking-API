@@ -277,6 +277,31 @@ All libraries have [remoteIP()](https://www.arduino.cc/reference/en/libraries/wi
 
 (3) WiFiClient is alias for NetworkClient. EthernetClient is not defined
 
+### `client.read(buff, size)` return value
+
+There are differences for return value of `client.read(buff, size)`. According to Arduino documentation return -1 is "no data available" and 0 is "connection is closed". And this is how it is in BSD sockets where there is no other way to get the closed state. But most Arduino libraries return 0 if no data are available and some return -1 if the client is not valid.
+
+Note: The Arduino documentation mixes `read()` with `read(buff, size)`. `read()` should definitely return -1 if no byte is available, because 0 is a valid returned value.
+
+| library | class | no data available | connection is closed (1) |
+|---|---|:---:|:---:|
+|Ethernet |[EthernetClient][21] | -1 | 0 |
+|WiFi101 |[WiFiClient][24] | -1 | 0 | 
+|WiFiNINA | [WiFiClient][23] | 0 | |
+|WiFiS3 |[WiFiClient][25] | 0 | |
+|Mbed SocketWrapper | [MbedClent][26]| -1 | |
+|C33 lwIpWrapper |[lwipClient][28] | -1 | |
+|ESP8266WiFi |[WiFiClient][30] | 0 | |
+|esp32 Network | [NetworkClient][32] | 0 | |
+|WiFiEspAT|[WiFiClient][34] | 0 | |
+|EthernetENC |[EthernetClient][35] | 0 | -1 |
+|STM32Ethernet| [EthernetClient][36] | 0 | -1 |
+|QNEthernet |[EthernetClient][37] | 0 | 0 |
+|RP2040 WiFi | [WiFiClient][38] (2) | 0 | |
+
+(1) empty field means that the state of the connection is not checked in read(buff, size)
+
+
 ### Secure layer
 
 | library | secure client | lastError() | setInsecure | allowSelfSignedCerts | disableSNI |
