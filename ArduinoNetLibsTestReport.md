@@ -44,10 +44,12 @@ pull requests:
 
 ### WiFiEspAT
 
+Issues are solved in version 2.
+
 Issues:
 
-* WiFi.disconnect() clears static IP and config(0) doesn't
-* reversed macAddress and BSSID for compatibility with Arduino WiFi libraries.
+* <del>WiFi.disconnect() clears static IP and config(0) doesn't</del>
+* <del>reversed macAddress and BSSID for compatibility with Arduino WiFi libraries.</del>
 
 
 ## Ethernet
