@@ -121,9 +121,9 @@ All libraries have [localIP()](https://www.arduino.cc/reference/en/libraries/eth
 |[esp8266 LwipIntfDev][11]  | ✓ | + | + | +
 |[esp32 WiFi][212] | ✓ | + | ✓ | ✓ |
 |[esp32 Ethernet][13] | ✓ | (2) | ✓ | ✓ |
-|[WiFiEspAT][14] | ✓ | ✓ | + | ✓ R |
+|[WiFiEspAT][14] | ✓ | ✓ | + | ✓ <del>R</del> |
 |[EthernetENC][15]  | + | + | + | ✓ |
-|[STM32Ethernet][16]| |  [issue](https://github.com/stm32duino/STM32Ethernet/issues/78) |  | 
+|[STM32Ethernet][16]| |  |  | 
 |[QNEthernet][17] | ✓ |  |  | ✓ |
 |[RP2040 WiFi][18] | ✓ | ✓ | + | ✓ |
 |[RP2040 LwipIntfDev][19] | ✓ | + | + | + |
@@ -144,7 +144,7 @@ Flag R is for "reversed". Arduino WiFi libraries copied the bug of the first WiF
 |[C33 Ethernet][9] |  PR | ✓ | + |
 |[esp8266 EthernetCompat][211] | + | + | + 
 |[EthernetENC][15]  | ✓ | ✓ | ✓
-|[STM32Ethernet][16]| + | ✓ |  is a setter! ([issue](https://github.com/stm32duino/STM32Ethernet/issues/81))
+|[STM32Ethernet][16]| + | ✓ |  <del>is a setter! ([issue](https://github.com/stm32duino/STM32Ethernet/issues/81))</del>
 |[QNEthernet][17] | ✓ | ✓ | ✓ |
 |[RP2040 EthernetCompat][213] | + | + | + |
 
@@ -159,9 +159,9 @@ Flag R is for "reversed". Arduino WiFi libraries copied the bug of the first WiF
 |[WiFiS3][5] | ✓ | ✓ | ✓ | | ✓ | returns 0 |
 |[Mbed WiFi][6] | ✓ | ✓ | ✓ | | ✓ | |
 |[C33 Wifi][8]  | ✓ | ✓ | ✓ | | ✓ | returns 0 |
-|[esp8266 WiFi][210] | ✓ | + | | ✓ | ✓ | |
+|[esp8266 WiFi][210] | ✓ | + | [PR](https://github.com/esp8266/Arduino/pull/9114) | ✓ | ✓ | |
 |[esp32 WiFi][212] | ✓ | + | | ✓ | ✓ | |
-|[WiFiEspAT][14] | ✓ | ✓ R | | + | ✓ | |
+|[WiFiEspAT][14] | ✓ | ✓ <del>R</del> | | + | ✓ | |
 |[RP2040 WiFi][18] | ✓ | ✓ | ✓ | ✓ | ✓ | returns `WL_NO_SHIELD` |
 
 ### WiFi AP network interface
@@ -194,25 +194,9 @@ For libraries which can only run one WiFi interface, after `beginAP` standard ge
 
 ### WiFi station networks scan
 
-All researched libraries have method [`scanNetworks()`](https://www.arduino.cc/reference/en/libraries/wifi/wifi.scannetworks/) defined by the first WiFi library.
+All researched libraries have methods [`scanNetworks()`](https://www.arduino.cc/reference/en/libraries/wifi/wifi.scannetworks/), `SSID(n)`, `encryptionType(n)` and `RSSI(n)` defined by the first WiFi library. All libraries except of the old WiFi library have `BSSID(n,bssid)` and `channel(n)`defined by the WiFi101 library. WiFi101 and WiFiNINA have the BSSID in reversed ordering.
 
-The scan result access methods:
-
-| library | SSID(n) | BSSID(n,bssid) | channel(n) | encryptionType(n) | RSSI(n) |
-|---|:---:|:---:|:---:|:---:|:---:|
-|[WiFi][2]* | ✓ |  |  | ✓ | ✓ |
-|[WiFi101][4] | ✓ | ✓*R | ✓* | ✓ | ✓ |
-|[WiFiNINA][3] | ✓ | ✓R | ✓ | ✓ | ✓ |
-|[WiFiS3][5] | ✓ | ✓ | ✓ | ✓ | ✓ |
-|[Mbed WiFi][6] | ✓ | + | + | ✓ | ✓ |
-|[C33 Wifi][8] | ✓ | ✓ | ✓ | ✓ | ✓ |
-|[esp8266 WiFi][410] | ✓ | + | ✓ | ✓ | ✓ |
-|[esp32 WiFi][412] | ✓ | + | ✓ | ✓(1) | ✓ |
-|[WiFiEspAT][14] | ✓ | ✓R | ✓ | ✓ | ✓ |
-|[RP2040 WiFi][18] | ✓ | ✓ | ✓ | ✓ | ✓ |
-
-
-(1) encryption type constant names are in esp32 very different from the common set used in other libraries
+Encryption type constant names are in esp32 WiFi library very different from the common set used in all other WiFi libraries.
 
 ### Network services
 
@@ -369,7 +353,7 @@ Modern server class implementations have constructor without parameters, method 
 |C33 lwIpWrapper |[lwipServer][48] (2) | ✓ | ✓ |
 |ESP8266WiFi |[WiFiServer][50] (3) | + | [ArduinoWiFiServer](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ArduinoWiFiServer.h) | ✓ | 
 |esp32 Network | [NetworkServer][52] (4)  | ✓ | ✗ (1) |✓ |
-|WiFiEspAT|[WiFiServer][54] |  + | WiFiServerPrint |✓ |
+|WiFiEspAT|[WiFiServer][54] |  + | ✗ (1) |✓ |
 |EthernetENC |[EthernetServer][55] | + |  EthernetServerPrint |✓ |
 |STM32Ethernet |[EthernetServer][56] | ✓ | ✓ |
 |QNEthernet |[EthernetServer][57] | ✓ | ✓ |
@@ -398,7 +382,7 @@ All Server classes have method [`begin`](https://www.arduino.cc/reference/en/lib
 |C33 lwIpWrapper |[lwipServer][48] | ✓ | | | | ✓ | |
 |ESP8266WiFi |[WiFiServer][50] | ✓ | + | + | ✓ | (1)(2) | ✓ | 
 |esp32 Network | [NetworkServer][52] | ✓ | ✓ | ✓ | ✓ | ✗(1) | ✓ |
-|WiFiEspAT|[WiFiServer][54] | + | ✓ | ✓ | ✓ | ✓ | ✓ |
+|WiFiEspAT|[WiFiServer][54] | + | ✓ | ✓ | ✓ | ✗(1) | ✓ |
 |EthernetENC |[EthernetServer][55] | + | ✓ | ✓ | | ✓ | ✓ |
 |STM32Ethernet |[EthernetServer][56] | ✓ | + | + | | ✓ | ✓ | 
 |QNEthernet |[EthernetServer][57] | ✓ | ✓ | ✓ | | ✓ | ✓ | 

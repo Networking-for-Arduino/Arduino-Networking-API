@@ -44,10 +44,12 @@ pull requests:
 
 ### WiFiEspAT
 
+Issues are solved in version 2.
+
 Issues:
 
-* WiFi.disconnect() clears static IP and config(0) doesn't
-* reversed macAddress and BSSID for compatibility with Arduino WiFi libraries.
+* <del>WiFi.disconnect() clears static IP and config(0) doesn't</del>
+* <del>reversed macAddress and BSSID for compatibility with Arduino WiFi libraries.</del>
 
 
 ## Ethernet
@@ -72,7 +74,7 @@ All problems discovered with the test were solved.
 
 Issues:
 
-* `MACAddress` is a setter ! ([issue](https://github.com/stm32duino/STM32Ethernet/issues/81))
+* <del>`MACAddress` is a setter ! ([issue](https://github.com/stm32duino/STM32Ethernet/issues/81))</del>
 
 Minor issues:
 
@@ -80,7 +82,7 @@ Minor issues:
 * doesn't have `setHostname`
 * doesn't have `end()`
 * doesn't have `hostByName`
-* doesn't have `setDNS`, `dnsIP(n)`, `macAddress` [issue](https://github.com/stm32duino/STM32Ethernet/issues/78)
+* doesn't have `setDNS`, `dnsIP(n)`, `macAddress` 
 * doesn't have Ethernet.h
 
 pull requests:
