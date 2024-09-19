@@ -79,7 +79,7 @@ Legend for the tables in this document:
 |[esp32 Ethernet][13] (2) | | not blocking | ✗ | wrong param. order | | |
 |[EthernetENC][15] | ✓ | ✓ | ✓ | | ✓ | ✓ |
 |[STM32Ethernet][16]| ✓ | ✓ | ✓ | | ✓ | ✓ |
-|[QNEthernet][17]| ✓ | ✓ | ✓ | | ✓ | |
+|[QNEthernet][17]| ✓ | ✓ | ✓ | | ✓ | ✓ |
 |[RP2040 EthernetCompat][213] | + | + | + |  | + | + |
 |[RP2040 LwipIntfDev][19] | + |  not blocking | ✗ | ✓ | + | |
 
@@ -356,7 +356,7 @@ Modern server class implementations have constructor without parameters, method 
 |WiFiEspAT|[WiFiServer][54] |  + | ✗ (1) |✓ |
 |EthernetENC |[EthernetServer][55] | + |  EthernetServerPrint |✓ |
 |STM32Ethernet |[EthernetServer][56] | ✓ | ✓ |
-|QNEthernet |[EthernetServer][57] | ✓ | ✓ |
+|QNEthernet |[EthernetServer][57] | ✓ | ✓ | ✓ |
 |RP2040 WiFi|[WiFiServer][58] (3)| + | ✗ (1) |✓ |
 
 (1) ArduinoWiFiServer in NetApiHelpers library has print-to-all-clients and proper server.available() 
@@ -437,7 +437,7 @@ All UDP classes in the researched libraries implement the Arduino UDP class whic
 [14]: https://github.com/JAndrassy/WiFiEspAT/blob/master/src/WiFi.h#L57
 [15]: https://github.com/JAndrassy/EthernetENC/blob/master/src/Ethernet.h#L75
 [16]: https://github.com/stm32duino/STM32Ethernet/blob/main/src/STM32Ethernet.h#L16
-[17]: https://github.com/ssilverman/QNEthernet/blob/master/src/QNEthernet.h#L62
+[17]: https://github.com/ssilverman/QNEthernet/blob/master/src/QNEthernet.h
 [18]: https://github.com/earlephilhower/arduino-pico/blob/master/libraries/WiFi/src/WiFiClass.h#L41
 [19]: https://github.com/earlephilhower/arduino-pico/blob/master/libraries/lwIP_Ethernet/src/LwipIntfDev.h#L57
 
