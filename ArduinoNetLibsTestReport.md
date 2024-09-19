@@ -95,7 +95,6 @@ pull requests:
 Minor issues:
 
 * doesn't have Ethernet.h
-* doesn't have `end()`
 * doesn't have `setDNS`, `dnsIP(n)`
 
 
