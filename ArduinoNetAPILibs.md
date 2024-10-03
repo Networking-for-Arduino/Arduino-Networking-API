@@ -114,7 +114,7 @@ All libraries have [localIP()](https://www.arduino.cc/reference/en/libraries/eth
 |[WiFiNINA][3] | ✓*| ✓ | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/251) | ✓ R
 |[WiFiS3][5] | ✓ | ✓ | ✓* | ✓ <del>R [PR](https://github.com/arduino/ArduinoCore-renesas/pull/183)</del>
 |[Mbed WiFi][6] |✗| ✓ | + | ✓ R |
-|[Mbed Ethernet][7]   | ✗ | ✓ | + | ✓ R !!! [issue](https://github.com/arduino/ArduinoCore-mbed/issues/752)|
+|[Mbed Ethernet][7]   | + | ✓ | + | ✓ R !!! [issue](https://github.com/arduino/ArduinoCore-mbed/issues/752)|
 |[C33 Wifi][8] | ✓ (1) | ✓ | + | ✓ <del>R [PR](https://github.com/arduino/ArduinoCore-renesas/pull/184)</del>
 |[C33 Ethernet][9] | [PR](https://github.com/arduino/ArduinoCore-renesas/pull/221) | ✓ | PR  | PR  |
 |[esp8266 WiFi][210] | ✓ | + | ✓ | ✓ |
@@ -349,7 +349,7 @@ Modern server class implementations have constructor without parameters, method 
 |WiFi101 |[WiFiServer][44]  | PR | ✓ |
 |WiFiNINA | [WiFiServer][43] | PR | ✓ |
 |WiFiS3 |[WiFiServer][45] | ✓* | ✓ |
-|Mbed SocketWrapper | [MbedServer][46] (2) | | ✗ (1) |  [PR](https://github.com/arduino/ArduinoCore-mbed/pull/793) |
+|Mbed SocketWrapper | [MbedServer][46] (2) | + | ✗ (1) | +  <del>[PR](https://github.com/arduino/ArduinoCore-mbed/pull/793)</del> |
 |C33 lwIpWrapper |[lwipServer][48] (2) | ✓ | ✓ |
 |ESP8266WiFi |[WiFiServer][50] (3) | + | [ArduinoWiFiServer](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ArduinoWiFiServer.h) | ✓ | 
 |esp32 Network | [NetworkServer][52] (4)  | ✓ | ✗ (1) |✓ |
@@ -378,7 +378,7 @@ All Server classes have method [`begin`](https://www.arduino.cc/reference/en/lib
 |WiFi101 |[WiFiServer][44] | [PR](https://github.com/arduino-libraries/WiFi101/pull/346) | [PR](https://github.com/arduino-libraries/WiFi101/pull/347) |  [PR](https://github.com/arduino-libraries/WiFi101/pull/345) | returns 0 [PR](https://github.com/arduino-libraries/WiFi101/pull/348) | ✓ |[PR](https://github.com/arduino-libraries/WiFi101/pull/320) |
 |WiFiNINA | [WiFiServer][43] |PR-> | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/254) |[PR](https://github.com/arduino-libraries/WiFiNINA/pull/253) | ✓ | ✓ | [PR](https://github.com/arduino-libraries/WiFiNINA/pull/204)|
 |WiFiS3 |[WiFiServer][45] | ✓*| ✓* | + | | ✓ | + |
-|Mbed SocketWrapper | [MbedServer][46] | | | | returns 0 [issue](https://github.com/arduino/ArduinoCore-mbed/issues/730) | ✗(1) | 
+|Mbed SocketWrapper | [MbedServer][46] | + | + | + | returns 0 [issue](https://github.com/arduino/ArduinoCore-mbed/issues/730) | ✗(1) | +
 |C33 lwIpWrapper |[lwipServer][48] | ✓ | | | | ✓ | |
 |ESP8266WiFi |[WiFiServer][50] | ✓ | + | + | ✓ | (1)(2) | ✓ | 
 |esp32 Network | [NetworkServer][52] | ✓ | ✓ | ✓ | ✓ | ✗(1) | ✓ |

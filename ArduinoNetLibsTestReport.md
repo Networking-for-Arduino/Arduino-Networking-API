@@ -164,7 +164,7 @@ Issues:
 
 Issues:
 
-* doesn't have `setHostname`. Mbed doesn't support hostname 
+* <del>doesn't have `setHostname`. Mbed doesn't support hostname</del> 
 * reversed ordering of bytes returned by `macAddress`, `BSSID` and `BSSID(n)` for compatibility with older Arduino WiFi libraries
 
 pull requests: 
@@ -181,7 +181,7 @@ Implements the legacy Ethernet API.
 
 Issues are
 
-* doesn't have `setHostname`. Mbed doesn't support hostname 
+* <del>doesn't have `setHostname`. Mbed doesn't support hostname</del> 
 * <del>can't return to DHCP after using static IP [PR](https://github.com/arduino/ArduinoCore-mbed/pull/823)</del>
 * `MACAddress` returns reversed ordering of bytes [issue](https://github.com/arduino/ArduinoCore-mbed/issues/752)
 * <del>[DNS server IP getters fix](https://github.com/arduino/ArduinoCore-mbed/pull/809)</del>
