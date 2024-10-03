@@ -10,9 +10,9 @@ With listed pull requests [applied](https://github.com/JAndrassy/WiFiNINA/tree/a
 
 pull requests:
 
-* [added dnsIP(n)](https://github.com/arduino-libraries/WiFiNINA/pull/251)
-* [auto dns, gw, mask](https://github.com/arduino-libraries/WiFiNINA/pull/219)
-* [rejoin with DHCP](https://github.com/arduino/nina-fw/pull/91) (nina-fw PR)
+* <del>[added dnsIP(n)](https://github.com/arduino-libraries/WiFiNINA/pull/251)</del>
+* <del>[auto dns, gw, mask](https://github.com/arduino-libraries/WiFiNINA/pull/219)</del> (PR merged to v2 branch)
+* <del>[rejoin with DHCP](https://github.com/arduino/nina-fw/pull/91) (nina-fw PR)</del>
 
 ### WiFi101
   
@@ -164,8 +164,8 @@ Issues:
 
 Issues:
 
-* doesn't have `setHostname`. Mbed doesn't support hostname 
-* reversed ordering of bytes returned by `macAddress`, `BSSID` and `BSSID(n)` for compatibility with older Arduino WiFi libraries
+* <del>doesn't have `setHostname`. Mbed doesn't support hostname</del> 
+* <del>reversed ordering of bytes returned by `macAddress`, `BSSID` and `BSSID(n)` for compatibility with older Arduino WiFi libraries</del>
 
 pull requests: 
 
@@ -181,9 +181,9 @@ Implements the legacy Ethernet API.
 
 Issues are
 
-* doesn't have `setHostname`. Mbed doesn't support hostname 
+* <del>doesn't have `setHostname`. Mbed doesn't support hostname</del> 
 * <del>can't return to DHCP after using static IP [PR](https://github.com/arduino/ArduinoCore-mbed/pull/823)</del>
-* `MACAddress` returns reversed ordering of bytes [issue](https://github.com/arduino/ArduinoCore-mbed/issues/752)
+* <del>MACAddress` returns reversed ordering of bytes [issue](https://github.com/arduino/ArduinoCore-mbed/issues/752)</del>
 * <del>[DNS server IP getters fix](https://github.com/arduino/ArduinoCore-mbed/pull/809)</del>
 
 
