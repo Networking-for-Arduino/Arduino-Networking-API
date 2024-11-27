@@ -208,7 +208,7 @@ The Ethernet/WiFi objects have some functions for simple services. (Libraries ma
 |[WiFi][2] | ✓* | | |
 |[WiFi101][4] | ✓ | ✓* | ✓* |
 |[WiFiNINA][3] | ✓ | ✓ | ✓ |
-|[WiFiS3][5] | ✓ | |returns 0 |
+|[WiFiS3][5] | ✓ | + | + |
 |[Mbed WiFi][6] | ✓ | |returns 0 |
 |[Mbed Ethernet][7] | ✓ | |returns 0 |
 |[C33 Wifi][8] | ✓ | |returns 0 |
