@@ -10,7 +10,7 @@ With listed pull requests [applied](https://github.com/JAndrassy/WiFiNINA/tree/a
 
 pull requests:
 
-* [added dnsIP(n)](https://github.com/arduino-libraries/WiFiNINA/pull/251)
+* <del>[added dnsIP(n)](https://github.com/arduino-libraries/WiFiNINA/pull/251)</del>
 * [auto dns, gw, mask](https://github.com/arduino-libraries/WiFiNINA/pull/219)
 * [rejoin with DHCP](https://github.com/arduino/nina-fw/pull/91) (nina-fw PR)
 
